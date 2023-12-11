@@ -1,0 +1,7 @@
+atributos module
+================
+
+.. automodule:: atributos
+   :members:
+   :undoc-members:
+   :show-inheritance:

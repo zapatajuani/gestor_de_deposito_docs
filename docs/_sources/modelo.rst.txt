@@ -1,0 +1,7 @@
+Modelo
+======
+
+.. automodule:: modelo
+   :members:
+   :undoc-members:
+   :private-members:

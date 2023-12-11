@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlador &mdash; documentación de Gestor de Deposito - 1.0.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/icono.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Guía de la Aplicacion" href="aplicacion.html" />
+    <link rel="prev" title="Vista" href="vista.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Gestor de Deposito
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modelo.html">Modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">Vista</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Controlador</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#controlador.Controlador"><code class="docutils literal notranslate"><span class="pre">Controlador</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.__init__"><code class="docutils literal notranslate"><span class="pre">Controlador.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.alta"><code class="docutils literal notranslate"><span class="pre">Controlador.alta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.baja"><code class="docutils literal notranslate"><span class="pre">Controlador.baja()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.refresh_table"><code class="docutils literal notranslate"><span class="pre">Controlador.refresh_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.actualizar"><code class="docutils literal notranslate"><span class="pre">Controlador.actualizar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.limpiar"><code class="docutils literal notranslate"><span class="pre">Controlador.limpiar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.consulta"><code class="docutils literal notranslate"><span class="pre">Controlador.consulta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.buscar"><code class="docutils literal notranslate"><span class="pre">Controlador.buscar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.genid"><code class="docutils literal notranslate"><span class="pre">Controlador.genid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlador.Controlador.exportar"><code class="docutils literal notranslate"><span class="pre">Controlador.exportar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aplicacion.html">Guía de la Aplicacion</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Gestor de Deposito</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Controlador</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/controlador.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-controlador">
+<span id="controlador"></span><h1>Controlador<a class="headerlink" href="#module-controlador" title="Link to this heading"></a></h1>
+<p>Modulo principal que se encarga de gestionar el programa, desde aqui se invocan las
+otras clases (Modeloy Vista), y se realiza toda la logica de la aplicacion.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="controlador.Controlador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controlador.</span></span><span class="sig-name descname"><span class="pre">Controlador</span></span><a class="reference internal" href="_modules/controlador.html#Controlador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador" title="Link to this definition"></a></dt>
+<dd><p>La clase Controlador va a ser la que se encargue, con sus
+instancia, de llevar este control de la aplicacion. Desde su constructor va a
+utilizar a las otras dos clases (Vista y Modelo), y mediante sus instancias generara
+la logica para poder operar la aplicaion.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.__init__"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.__init__" title="Link to this definition"></a></dt>
+<dd><p>Como se dijo anteriormenete, desde el constructor se invocaran a las otras dos clases
+y se inicializarade forma correcta la aplicacion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.alta">
+<span class="sig-name descname"><span class="pre">alta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.alta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.alta" title="Link to this definition"></a></dt>
+<dd><p>Se da de alta los datos que proporciona el ususario hacia
+la base de datos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.baja">
+<span class="sig-name descname"><span class="pre">baja</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.baja"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.baja" title="Link to this definition"></a></dt>
+<dd><p>Se dan de baja los datos que el usuario seleccione de la base de datos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.refresh_table">
+<span class="sig-name descname"><span class="pre">refresh_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.refresh_table"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.refresh_table" title="Link to this definition"></a></dt>
+<dd><p>Se actualiza la tabla. Es una instancia interna para poder visualizar los
+cambios cadavez que se realizan.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.actualizar">
+<span class="sig-name descname"><span class="pre">actualizar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.actualizar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.actualizar" title="Link to this definition"></a></dt>
+<dd><p>Se actualizan los datos en la base de datos que el usuario haya modificado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.limpiar">
+<span class="sig-name descname"><span class="pre">limpiar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.limpiar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.limpiar" title="Link to this definition"></a></dt>
+<dd><p>Pone todos los valores de los campos de toma de datos en un valor de <em>default</em>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.consulta">
+<span class="sig-name descname"><span class="pre">consulta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.consulta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.consulta" title="Link to this definition"></a></dt>
+<dd><p>Setea los valores de los campos de entrada segun el valor de la tabla seleccionado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.buscar">
+<span class="sig-name descname"><span class="pre">buscar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.buscar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.buscar" title="Link to this definition"></a></dt>
+<dd><p>Actualiza la tabla segun los valores que coincidan con los ingresados en los
+campos de entrada.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.genid">
+<span class="sig-name descname"><span class="pre">genid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.genid"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.genid" title="Link to this definition"></a></dt>
+<dd><p>Proporciona un valor de <em>Item-ID</em> con un valor aleatoreo teniendo en cuenta el
+resto de valores ingresado por el usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controlador.Controlador.exportar">
+<span class="sig-name descname"><span class="pre">exportar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/controlador.html#Controlador.exportar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controlador.Controlador.exportar" title="Link to this definition"></a></dt>
+<dd><p>Exporta la tabla principal a un formato <em>.xlsx</em>
+hacia alguna de las siguientes ubicaicones:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Documentos</strong></p></li>
+<li><p><strong>Escritorio</strong></p></li>
+<li><p><strong>Ubicacion del programa</strong></p></li>
+</ul>
+</div></blockquote>
+<p>Este es el orden que intentara de manera predeterminada.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="vista.html" class="btn btn-neutral float-left" title="Vista" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="aplicacion.html" class="btn btn-neutral float-right" title="Guía de la Aplicacion" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Juan Ignacio Zapata.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
