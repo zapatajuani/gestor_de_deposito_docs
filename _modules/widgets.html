@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>widgets &#8212; documentación de Gestor de Deposito - 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para widgets</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span>
+<span class="kn">from</span> <span class="nn">atributos</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="Ventana">
+<a class="viewcode-back" href="../widgets.html#widgets.Ventana">[documentos]</a>
+<span class="k">class</span> <span class="nc">Ventana</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Labelframe</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">cspan</span><span class="p">,</span> <span class="n">rspan</span><span class="p">,</span> <span class="n">titulo</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">titulo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span>
+                  <span class="n">columnspan</span><span class="o">=</span><span class="n">cspan</span><span class="p">,</span>
+                  <span class="n">rowspan</span><span class="o">=</span><span class="n">rspan</span><span class="p">,</span>
+                  <span class="n">padx</span><span class="o">=</span><span class="n">att_ventanas</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">],</span>
+                  <span class="n">pady</span><span class="o">=</span><span class="n">att_ventanas</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">],</span>
+                  <span class="n">sticky</span><span class="o">=</span><span class="n">att_ventanas</span><span class="p">[</span><span class="s2">&quot;sticky&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Texto">
+<a class="viewcode-back" href="../widgets.html#widgets.Texto">[documentos]</a>
+<span class="k">class</span> <span class="nc">Texto</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Label</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">cspan</span><span class="p">,</span> <span class="n">rspan</span><span class="p">,</span> <span class="n">texto</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">texto</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">att_labels</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span>
+                  <span class="n">columnspan</span><span class="o">=</span><span class="n">cspan</span><span class="p">,</span>
+                  <span class="n">rowspan</span><span class="o">=</span><span class="n">rspan</span><span class="p">,</span>
+                  <span class="n">ipadx</span><span class="o">=</span><span class="n">att_labels</span><span class="p">[</span><span class="s2">&quot;ipadx&quot;</span><span class="p">],</span>
+                  <span class="n">ipady</span><span class="o">=</span><span class="n">att_labels</span><span class="p">[</span><span class="s2">&quot;ipady&quot;</span><span class="p">],</span>
+                  <span class="n">padx</span><span class="o">=</span><span class="n">att_labels</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">],</span>
+                  <span class="n">pady</span><span class="o">=</span><span class="n">att_labels</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">],</span>
+                  <span class="n">sticky</span><span class="o">=</span><span class="n">att_labels</span><span class="p">[</span><span class="s2">&quot;sticky&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Boton">
+<a class="viewcode-back" href="../widgets.html#widgets.Boton">[documentos]</a>
+<span class="k">class</span> <span class="nc">Boton</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">cspan</span><span class="p">,</span> <span class="n">rspan</span><span class="p">,</span> <span class="n">texto</span><span class="p">,</span> <span class="n">funcion</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">texto</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">funcion</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">att_buttons</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span>
+                  <span class="n">columnspan</span><span class="o">=</span><span class="n">cspan</span><span class="p">,</span>
+                  <span class="n">rowspan</span><span class="o">=</span><span class="n">rspan</span><span class="p">,</span>
+                  <span class="n">ipadx</span><span class="o">=</span><span class="n">att_buttons</span><span class="p">[</span><span class="s2">&quot;ipadx&quot;</span><span class="p">],</span>
+                  <span class="n">ipady</span><span class="o">=</span><span class="n">att_buttons</span><span class="p">[</span><span class="s2">&quot;ipady&quot;</span><span class="p">],</span>
+                  <span class="n">padx</span><span class="o">=</span><span class="n">att_buttons</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">],</span>
+                  <span class="n">pady</span><span class="o">=</span><span class="n">att_buttons</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">],</span>
+                  <span class="n">sticky</span><span class="o">=</span><span class="n">att_buttons</span><span class="p">[</span><span class="s2">&quot;sticky&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Entrada">
+<a class="viewcode-back" href="../widgets.html#widgets.Entrada">[documentos]</a>
+<span class="k">class</span> <span class="nc">Entrada</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">cspan</span><span class="p">,</span> <span class="n">rspan</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">variable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">att_entry</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span>
+                  <span class="n">columnspan</span><span class="o">=</span><span class="n">cspan</span><span class="p">,</span>
+                  <span class="n">rowspan</span><span class="o">=</span><span class="n">rspan</span><span class="p">,</span>
+                  <span class="n">ipadx</span><span class="o">=</span><span class="n">att_entry</span><span class="p">[</span><span class="s2">&quot;ipadx&quot;</span><span class="p">],</span>
+                  <span class="n">ipady</span><span class="o">=</span><span class="n">att_entry</span><span class="p">[</span><span class="s2">&quot;ipady&quot;</span><span class="p">],</span>
+                  <span class="n">padx</span><span class="o">=</span><span class="n">att_entry</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">],</span>
+                  <span class="n">pady</span><span class="o">=</span><span class="n">att_entry</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">],</span>
+                  <span class="n">sticky</span><span class="o">=</span><span class="n">att_entry</span><span class="p">[</span><span class="s2">&quot;sticky&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Combobox">
+<a class="viewcode-back" href="../widgets.html#widgets.Combobox">[documentos]</a>
+<span class="k">class</span> <span class="nc">Combobox</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Combobox</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">cspan</span><span class="p">,</span> <span class="n">rspan</span><span class="p">,</span> <span class="n">lista</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">variable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lista</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;readonly&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">att_combobox</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span>
+                  <span class="n">columnspan</span><span class="o">=</span><span class="n">cspan</span><span class="p">,</span>
+                  <span class="n">rowspan</span><span class="o">=</span><span class="n">rspan</span><span class="p">,</span>
+                  <span class="n">ipadx</span><span class="o">=</span><span class="n">att_combobox</span><span class="p">[</span><span class="s2">&quot;ipadx&quot;</span><span class="p">],</span>
+                  <span class="n">ipady</span><span class="o">=</span><span class="n">att_combobox</span><span class="p">[</span><span class="s2">&quot;ipady&quot;</span><span class="p">],</span>
+                  <span class="n">padx</span><span class="o">=</span><span class="n">att_combobox</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">],</span>
+                  <span class="n">pady</span><span class="o">=</span><span class="n">att_combobox</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">],</span>
+                  <span class="n">sticky</span><span class="o">=</span><span class="n">att_combobox</span><span class="p">[</span><span class="s2">&quot;sticky&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Tabla">
+<a class="viewcode-back" href="../widgets.html#widgets.Tabla">[documentos]</a>
+<span class="k">class</span> <span class="nc">Tabla</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">contenido</span><span class="p">):</span>
+
+        <span class="n">tabla_scroll</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span><span class="n">master</span><span class="p">)</span>
+        <span class="n">tabla_scroll</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="n">RIGHT</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">aux</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">contenido</span><span class="p">:</span>
+            <span class="n">aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">aux</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="s2">&quot;headings&quot;</span><span class="p">,</span>
+                         <span class="n">yscrollcommand</span><span class="o">=</span><span class="n">tabla_scroll</span><span class="o">.</span><span class="n">set</span><span class="p">,</span>
+                         <span class="n">height</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+        <span class="n">tabla_scroll</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">yview</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">contenido</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">anchor</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="n">RIGHT</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../widgets.html#widgets.main">[documentos]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">pass</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Gestor de Deposito</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../atributos.html">atributos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controlador.html">controlador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">modelo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">vista module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widgets.html">widgets module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Juan Ignacio Zapata.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

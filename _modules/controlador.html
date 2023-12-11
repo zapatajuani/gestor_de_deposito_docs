@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>controlador &mdash; documentación de Gestor de Deposito - 1.0.0</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Gestor de Deposito
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">Modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">Vista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controlador.html">Controlador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aplicacion.html">Aplicacion</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gestor de Deposito</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">controlador</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para controlador</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Modulo principal que se encarga de gestionar el programa, desde aqui se invocan las</span>
+<span class="sd">otras clases (Modeloy Vista), y se realiza toda la logica de la aplicacion.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sqlite3</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">OperationalError</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">fullmatch</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getlogin</span>
+<span class="kn">from</span> <span class="nn">openpyxl</span> <span class="kn">import</span> <span class="n">Workbook</span>
+<span class="kn">from</span> <span class="nn">vista</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">modelo</span> <span class="kn">import</span> <span class="n">Modelo</span>
+
+<span class="n">database</span> <span class="o">=</span> <span class="s2">&quot;src\datos\main.db&quot;</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="s2">&quot;DEPOSITO&quot;</span>
+
+<div class="viewcode-block" id="Controlador">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador">[documentos]</a>
+<span class="k">class</span> <span class="nc">Controlador</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    La clase Controlador va a ser la que se encargue, con sus</span>
+<span class="sd">    instancia, de llevar este control de la aplicacion. Desde su constructor va a</span>
+<span class="sd">    utilizar a las otras dos clases (Vista y Modelo), y mediante sus instancias generara</span>
+<span class="sd">    la logica para poder operar la aplicaion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Controlador.__init__">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.__init__">[documentos]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Como se dijo anteriormenete, desde el constructor se invocaran a las otras dos clases</span>
+<span class="sd">        y se inicializarade forma correcta la aplicacion.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span> <span class="o">=</span> <span class="n">Modelo</span><span class="p">(</span><span class="n">database</span><span class="p">,</span> <span class="n">tabla</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limpiar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Controlador.alta">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.alta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">alta</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se da de alta los datos que proporciona el ususario hacia</span>
+<span class="sd">        la base de datos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[A-Z]</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{6}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">get</span><span class="p">()):</span>
+                <span class="n">fecha_hoy</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y - %H:%M:%S&quot;</span><span class="p">)</span>
+                <span class="n">datos</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_precio</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_stock</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_categoria</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                    <span class="n">fecha_hoy</span>
+                <span class="p">]</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">insert_row</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">limpiar</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR.ALTA.ITEMID&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">IntegrityError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR.ALTA.2ITEMID&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controlador.baja">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.baja">[documentos]</a>
+    <span class="k">def</span> <span class="nf">baja</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se dan de baja los datos que el usuario seleccione de la base de datos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">iid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">focus</span><span class="p">())[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">delete_row</span><span class="p">(</span><span class="n">iid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">OperationalError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR.BAJA&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controlador.refresh_table">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.refresh_table">[documentos]</a>
+    <span class="k">def</span> <span class="nf">refresh_table</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se actualiza la tabla. Es una instancia interna para poder visualizar los</span>
+<span class="sd">        cambios cadavez que se realizan.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">get_children</span><span class="p">())</span>
+
+        <span class="n">datos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">leer_tabla</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+
+            <span class="n">iid</span> <span class="o">=</span> <span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">lista_aux</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+                <span class="n">lista_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">valores</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">lista_aux</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">iid</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">valores</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">combo_categoria</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">extract_categoria</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Controlador.actualizar">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.actualizar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se actualizan los datos en la base de datos que el usuario haya modificado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">estado_consulta</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="n">iid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">focus</span><span class="p">())[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+
+            <span class="n">fecha_hoy</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y - %H:%M:%S&quot;</span><span class="p">)</span>
+            <span class="n">datos</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_precio</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_stock</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_categoria</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="n">fecha_hoy</span><span class="p">,</span>
+                <span class="n">iid</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limpiar</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR.ACTUALIZAR&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controlador.limpiar">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.limpiar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pone todos los valores de los campos de toma de datos en un valor de *default*.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_precio</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_stock</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_categoria</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">estado_consulta</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Controlador.consulta">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.consulta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">consulta</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setea los valores de los campos de entrada segun el valor de la tabla seleccionado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">iid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">focus</span><span class="p">())[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="n">datos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">leer_fila</span><span class="p">(</span><span class="n">iid</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_precio</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_stock</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_categoria</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">estado_consulta</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR.CONSULTA&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controlador.buscar">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.buscar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">buscar</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actualiza la tabla segun los valores que coincidan con los ingresados en los</span>
+<span class="sd">        campos de entrada.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">datos</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_precio</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_stock</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_categoria</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">datos</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">get_children</span><span class="p">())</span>
+
+            <span class="n">datos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">buscar</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+
+                <span class="n">iid</span> <span class="o">=</span> <span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">lista_aux</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+                    <span class="n">lista_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">valores</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">lista_aux</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">tabla_principal</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">iid</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">valores</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controlador.genid">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.genid">[documentos]</a>
+    <span class="k">def</span> <span class="nf">genid</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Proporciona un valor de *Item-ID* con un valor aleatoreo teniendo en cuenta el</span>
+<span class="sd">        resto de valores ingresado por el usuario. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT itemid FROM </span><span class="si">{</span><span class="n">tabla</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">lista_ids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+                <span class="n">lista_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_categoria</span><span class="o">.</span><span class="n">get</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_nombre</span><span class="o">.</span><span class="n">get</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100000</span><span class="p">))</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+                <span class="n">new_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}{</span><span class="n">b</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">new_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lista_ids</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">valor_item_id</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">new_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR.GENID&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Controlador.exportar">
+<a class="viewcode-back" href="../controlador.html#controlador.Controlador.exportar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">exportar</span><span class="p">(</span>
+            <span class="bp">self</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exporta la tabla principal a un formato *.xlsx*</span>
+<span class="sd">        hacia alguna de las siguientes ubicaicones:</span>
+
+<span class="sd">          * **Documentos**</span>
+<span class="sd">          </span>
+<span class="sd">          * **Escritorio**</span>
+
+<span class="sd">          * **Ubicacion del programa**</span>
+
+<span class="sd">        Este es el orden que intentara de manera predeterminada.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">wb</span> <span class="o">=</span> <span class="n">Workbook</span><span class="p">()</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">active</span>
+        <span class="n">ws</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">tabla</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">ws</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Item ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Nombre&quot;</span><span class="p">,</span> <span class="s2">&quot;Precio&quot;</span><span class="p">,</span> <span class="s2">&quot;Stock&quot;</span><span class="p">,</span> <span class="s2">&quot;Categoria&quot;</span><span class="p">,</span> <span class="s2">&quot;Fecha de modificaicon&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">leer_tabla</span><span class="p">():</span>
+            <span class="n">ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="n">fecha_hoy</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">.%m.%Y - %H h %M m %S s&quot;</span><span class="p">)</span>
+
+        <span class="n">nombre_archivo_excel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">tabla</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">fecha_hoy</span><span class="si">}</span><span class="s2">.xlsx&quot;</span>
+
+        <span class="n">directorios</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="si">{</span><span class="n">getlogin</span><span class="p">()</span><span class="si">}</span><span class="se">\\</span><span class="s2">Documents</span><span class="se">\\</span><span class="si">{</span><span class="n">nombre_archivo_excel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="si">{</span><span class="n">getlogin</span><span class="p">()</span><span class="si">}</span><span class="se">\\</span><span class="s2">Desktop</span><span class="se">\\</span><span class="si">{</span><span class="n">nombre_archivo_excel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">nombre_archivo_excel</span>
+        <span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">directorios</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">wb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">aviso_exportacion</span><span class="p">(</span><span class="n">directorios</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                <span class="k">pass</span></div>
+</div>
+
+
+<span class="k">def</span> <span class="nf">_main</span><span class="p">():</span>
+    <span class="n">mi_programa</span> <span class="o">=</span> <span class="n">Controlador</span><span class="p">()</span>
+    <span class="n">mi_programa</span><span class="o">.</span><span class="n">vista</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+    <span class="n">mi_programa</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">_main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Juan Ignacio Zapata.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

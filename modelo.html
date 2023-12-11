@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelo &mdash; documentación de Gestor de Deposito - 1.0.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/icono.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Vista" href="vista.html" />
+    <link rel="prev" title="Documentacion sobre la aplicacion Gestor de Deposito" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Gestor de Deposito
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modelo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.Modelo"><code class="docutils literal notranslate"><span class="pre">Modelo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.__init__"><code class="docutils literal notranslate"><span class="pre">Modelo.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo._crear_tabla"><code class="docutils literal notranslate"><span class="pre">Modelo._crear_tabla()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.insert_row"><code class="docutils literal notranslate"><span class="pre">Modelo.insert_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.delete_row"><code class="docutils literal notranslate"><span class="pre">Modelo.delete_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.buscar"><code class="docutils literal notranslate"><span class="pre">Modelo.buscar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.leer_tabla"><code class="docutils literal notranslate"><span class="pre">Modelo.leer_tabla()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.leer_fila"><code class="docutils literal notranslate"><span class="pre">Modelo.leer_fila()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.update"><code class="docutils literal notranslate"><span class="pre">Modelo.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Modelo.extract_categoria"><code class="docutils literal notranslate"><span class="pre">Modelo.extract_categoria()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">Vista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controlador.html">Controlador</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aplicacion.html">Guía de la Aplicacion</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Gestor de Deposito</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Modelo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modelo.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modelo">
+<span id="modelo"></span><h1>Modelo<a class="headerlink" href="#module-modelo" title="Link to this heading"></a></h1>
+<p>El modulo Modelo es el encargado de interactuar con la
+base de datos, generar la conexion y las request que pida el
+controlador.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelo.Modelo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">Modelo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi_database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nombre_tabla</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo" title="Link to this definition"></a></dt>
+<dd><p>La clase Modelo se construye pasandole dos parametros, la ruta de la base
+de datos y el nombre de la tabla (este se puede crear o cargar si ya existe).
+Esta clase se llama desde el controlador, en el constructor de su clase, para que
+pueda ejecutar las instacias del modelo y asi interactuar con la base de datos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mi_database</strong> (<em>str</em>) – Ruta de acceso a la base de datos</p></li>
+<li><p><strong>nombre_tabla</strong> (<em>str</em>) – Nombre de la tabla a la cual acceder o crear</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi_database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nombre_tabla</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.__init__"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.__init__" title="Link to this definition"></a></dt>
+<dd><p>En el conructor de la clase generaremos la conexion con la base de datos y
+con la instancia _crear_tabla crearemos la tabla si es que esta no existe. Ademas
+asignaremos las variables de clase:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>self.con</strong>: La conexion a la base de datos.</p></li>
+<li><p><strong>self.cursor</strong>: El cursor para actuar sobre la abse de datos.</p></li>
+<li><p><strong>self.tabla</strong>: El nombre de la tabla asignado a una variable de clase.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo._crear_tabla">
+<span class="sig-name descname"><span class="pre">_crear_tabla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo._crear_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo._crear_tabla" title="Link to this definition"></a></dt>
+<dd><p>Metodo de instancia interno del modulo que se utiliza para crear la
+tabla en el caso de que esta no exista.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.insert_row">
+<span class="sig-name descname"><span class="pre">insert_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_querry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.insert_row"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.insert_row" title="Link to this definition"></a></dt>
+<dd><p>Inserta una fila completa en la tabla con los datos proporcionados.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_querry</strong> (<em>tuple</em>) – Tupla que contiene en orden los datos de cada fila de la tabla que se quieren ingresar.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.delete_row">
+<span class="sig-name descname"><span class="pre">delete_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.delete_row"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.delete_row" title="Link to this definition"></a></dt>
+<dd><p>Se elimina la fila indicada con el <em>iid</em> correspondiente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iid</strong> (<em>int</em>) – Valor clave de la fila que se desea eliminar.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.buscar">
+<span class="sig-name descname"><span class="pre">buscar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_querry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.buscar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.buscar" title="Link to this definition"></a></dt>
+<dd><p>Funcion que devuelve los valores de la tabla que coincidan con los elementos pasados
+como argumentos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_querry</strong> (<em>tuple</em>) – Tupla que contiene en orden los datos de busqueda.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Todos los datos que coincidan con los pasados en el <em>data_querry</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.leer_tabla">
+<span class="sig-name descname"><span class="pre">leer_tabla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.leer_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.leer_tabla" title="Link to this definition"></a></dt>
+<dd><p>Selecciona todos los elementos de la tabla y los devuelve ordenados de manera descendente
+por la ultima fecha de modificacicon de cada uno.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.leer_fila">
+<span class="sig-name descname"><span class="pre">leer_fila</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.leer_fila"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.leer_fila" title="Link to this definition"></a></dt>
+<dd><p>Retorna los datos de la fila que coincida con el id proporcionado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iid</strong> (<em>int</em>) – Valor clave de la fila que se desea extraer los datos.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Se devuelve una tupla con los datos de la fila solicitada</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_querry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.update"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.update" title="Link to this definition"></a></dt>
+<dd><p>Actualiza toda una fila de la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_querry</strong> (<em>tuple</em>) – Tupla que contiene los datos de la fila que se quiere modificar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Modelo.extract_categoria">
+<span class="sig-name descname"><span class="pre">extract_categoria</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Modelo.extract_categoria"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Modelo.extract_categoria" title="Link to this definition"></a></dt>
+<dd><p>Extrae de los elementos de la columna CATEGORIA sin repertir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Devuele una <strong>lista</strong> con las categorias que la tabla posee, sin repetir.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentacion sobre la aplicacion Gestor de Deposito" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="vista.html" class="btn btn-neutral float-right" title="Vista" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Juan Ignacio Zapata.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
