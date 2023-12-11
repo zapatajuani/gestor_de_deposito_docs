@@ -1,4 +1,4 @@
-# Gestor de deposito documentacion
+# Gestor de deposito - Documentacion
 
 En esta pagina de Github se encuentran los archivos web para la documentacion de la aplicacion Gestor de deposito.
 
