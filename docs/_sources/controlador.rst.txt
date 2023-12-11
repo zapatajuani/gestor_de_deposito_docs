@@ -1,7 +1,0 @@
-Controlador
-===========
-
-.. automodule:: controlador
-   :members:
-   :undoc-members:
-   :private-members:

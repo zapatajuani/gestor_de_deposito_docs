@@ -1,7 +1,0 @@
-Vista
-=====
-
-.. automodule:: vista
-   :members:
-   :undoc-members:
-   :private-members:
