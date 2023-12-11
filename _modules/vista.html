@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icono.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -50,7 +51,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../modelo.html">Modelo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../vista.html">Vista</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../controlador.html">Controlador</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aplicacion.html">Aplicacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aplicacion.html">Guía de la Aplicacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contactos.html">Contacto</a></li>
 </ul>
 
         </div>
@@ -119,12 +121,15 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">controlador</span> <span class="o">=</span> <span class="n">controlador</span>
 
+        <span class="n">abs_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[:</span><span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="n">ico_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">src\img\icono.ico&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">theme_use</span><span class="p">(</span><span class="s2">&quot;clam&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;#DCDAD5&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gestor de Deposito&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;src\img\icono.ico&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="n">ico_path</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">valor_item_id</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor_nombre</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>

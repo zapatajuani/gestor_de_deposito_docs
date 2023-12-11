@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icono.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -50,7 +51,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../modelo.html">Modelo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../vista.html">Vista</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../controlador.html">Controlador</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aplicacion.html">Aplicacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aplicacion.html">Guía de la Aplicacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contactos.html">Contacto</a></li>
 </ul>
 
         </div>
@@ -91,7 +93,8 @@
 <span class="kn">from</span> <span class="nn">vista</span> <span class="kn">import</span> <span class="n">App</span>
 <span class="kn">from</span> <span class="nn">modelo</span> <span class="kn">import</span> <span class="n">Modelo</span>
 
-<span class="n">database</span> <span class="o">=</span> <span class="s2">&quot;src\datos\main.db&quot;</span>
+<span class="n">abs_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[:</span><span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">database</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">src\datos\main.db&quot;</span>
 <span class="n">tabla</span> <span class="o">=</span> <span class="s2">&quot;DEPOSITO&quot;</span>
 
 <div class="viewcode-block" id="Controlador">
